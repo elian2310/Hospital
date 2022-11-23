@@ -1,0 +1,33 @@
+<div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg">
+    <h1 class="text-center text-3xl font-bold">Registrar Suceso</h1>
+    <form action="" method="POST" class="mt-4">
+        <input type="text" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white" placeholder="Tipo de suceso" name="tipo">
+
+        <select name="ambiente" id="ambiente" class="form-control rounded-md bg-gray-200 w-full my-2">
+            <option value="">Seleccione un ambiente</option>
+            {{#each data_ambientes}}
+            <option value="{{idAmbiente}}">{{nombre}}</option>
+            {{/each}}
+        </select>
+
+        <select name="personal" id="personal" class="form-control rounded-md bg-gray-200 w-full my-2">
+            <option value="">Seleccione un encargado</option>
+            {{#each data_personal}}
+            <option value="{{ciPersonal}}">{{nombre}} {{apellidoPrincipal}}</option>
+            {{/each}}
+        </select>
+
+        <select name="usuario" id="usuario" class="form-control rounded-md bg-gray-200 w-full my-2">
+            <option value="">Seleccione un paciente</option>
+            {{#each data_usuarios}}
+            <option value="{{ciUsuario}}">{{nombre}} {{apellidoPrincipal}}</option>
+            {{/each}}
+        </select>
+
+        <input type="text" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white" placeholder="Fecha" name="datepicker" id="datepicker">
+
+        <textarea class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white h-40" placeholder="Descripción del suceso" name="descripcion"></textarea>
+
+        <button type="submit" class="rounded-md bg-green-500 w-full text-lg text-white font-semibold p-2 my-3 hover:bg-green-600 focus:bg-green-700">Registrar</button>
+    </form>
+</div> 
