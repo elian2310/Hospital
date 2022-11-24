@@ -3,6 +3,7 @@ const { engine } = require('express-handlebars');
 const myconnection = require('express-myconnection');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const session = require('express-session')
 const sucesosRoutes = require('./routes/sucesos');
 
 const app = express();
