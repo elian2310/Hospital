@@ -4,7 +4,7 @@ function index(req, res){
             if(err) {
                 res.json(err);
             }
-            res.render('sucesos/index', { sucesos });
+            res.render('sucesos/index', { layout: 'employee.hbs', sucesos: sucesos });
         });
     });
     
@@ -33,7 +33,7 @@ function registrar(req, res){
             }
             d_usuarios = usuarios;
         });
-        res.render('sucesos/registrar', { data_personal : d_personal, data_ambientes : d_ambientes, data_usuarios : d_usuarios });
+        res.render('sucesos/registrar', { layout: 'employee.hbs', data_personal : d_personal, data_ambientes : d_ambientes, data_usuarios : d_usuarios });
     });
     
 }

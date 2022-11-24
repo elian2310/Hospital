@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Plataforma Hospital</title>
+    
+    <!-- Tailwind CSS Link -->
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
+
+    <!-- Fontawesome Link -->
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
+
+    <script>
+        jQuery(function($){
+            $('#fecha').datetimepicker({
+                dateFormat: "yy-mm-dd",
+                showSecond: true,
+                timeFormat: "hh:mm:ss"
+            });
+        });
+    </script>
+ 
+  </head>
+  <body class="bg-green-100">
+
+    <nav class="flex py-5 bg-green-500 text-white px-24">
+        <div class="w-1/2 px-12 mr-auto">
+            <p class="text-2xl font-bold">App Hospital</p>
+        </div>
+
+        <ul class="w-2/2 px-16 ml-auto flex justify-end pt-1">
+            <li class="nav-item px-4">
+                <a href="/sucesos" class="nav-link font-semibold hover:bg-green-700 py-3 px-4 rounded.md">Sucesos</a>
+            </li>
+            <li class="nav-item px-4">
+                <a href="/registrar" class="nav-link font-semibold border-2 border-white hover:text-green-700 hover:bg-white-700 py-3 px-4 rounded.md">+Suceso</a>
+            </li>
+            <li class="nav-item px-4">
+                <a href="/sucesos" class="nav-link font-semibold hover:bg-green-700 py-3 px-4 rounded.md">Personal</a>
+            </li>
+            <li class="nav-item px-4">
+                <a href="/registrar" class="nav-link font-semibold border-2 border-white hover:text-green-700 hover:bg-white-700 py-3 px-4 rounded.md">+Personal</a>
+            </li>
+            <li class="nav-item px-4">
+                <a href="/sucesos" class="nav-link font-semibold hover:bg-green-700 py-3 px-4 rounded.md">Usuarios</a>
+            </li>
+            <li class="nav-item px-4">
+                <a href="/registrar" class="nav-link font-semibold border-2 border-white hover:text-green-700 hover:bg-white-700 py-3 px-4 rounded.md">+Usuario</a>
+            </li>
+
+            <li class="nav-item px-4">
+                <a href="/sucesos" class="bg-red-500 nav-link font-semibold hover:bg-red-700 py-3 px-4 rounded.md">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    {{{body}}}
+  
+  </body>
+</html>
