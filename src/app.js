@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const session = require('express-session')
 const sucesosRoutes = require('./routes/sucesos');
-
+const userRoutes = require('./routes/usuarios');
+const ambRoutes = require('./routes/ambientes')
 const app = express();
 app.set('port', 4000);
 
@@ -36,6 +37,8 @@ app.listen(app.get('port'), () => {
 });
 
 app.use('/', sucesosRoutes);
+app.use('/', userRoutes);
+app.use('/', ambRoutes);
 
 app.get('/', (req, res) => {
     res.render('home', {layout: 'main.hbs'});

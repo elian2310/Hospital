@@ -1,0 +1,33 @@
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+  <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mt-12">
+
+    <table class="table-fixed w-full">
+      <thead>
+        <tr class="bg-green-500 text-white">
+          <th class="w-20 py-4 ...">idAmbiente</th>
+          <th class="w-30 py-4 ...">Nombre</th>
+          <th class="w-30 py-4 ...">Estado</th>
+          <th class="w-30 py-4 ...">Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each ambientes}}
+        <tr>
+          <td class="py-3 px-6">{{idAmbiente}}</td>
+          <td class="p-3">{{nombre}}</td>
+          <td class="p-3">{{disponible}}</td>
+          <td class="p-3 flex">
+            <form action="/ambientes/delete" method="POST" class="mx-2">
+              <input type="hidden" value="{{idAmbiente}}" name="id">
+              <button class="bg-red-500 text-white px-3 py-1 rounded-sm" type="submit">
+                <i class="fas fa-trash"></i></button>
+            </form>
+            <a href="/ambientes/edit/{{idAmbiente}}" class="bg-green-500 text-white px-3 py-1 rounded-sm">
+              <i class="fas fa-pen"></i></a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
