@@ -38,6 +38,9 @@ function registrar(req, res){
     
 }
 
+
+
+
 function store(req, res){
     console.log(req.body);
     const datos = req.body;

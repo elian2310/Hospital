@@ -7,6 +7,8 @@ const session = require('express-session')
 const sucesosRoutes = require('./routes/sucesos');
 const loginRoutes = require('./routes/login');
 const personalRoutes = require('./routes/personal');
+const userRoutes = require('./routes/usuarios');
+const ambRoutes = require('./routes/ambientes')
 
 const app = express();
 app.set('port', 4000);
@@ -44,6 +46,9 @@ app.listen(app.get('port'), () => {
 app.use('/', sucesosRoutes);
 app.use('/', loginRoutes);
 app.use('/', personalRoutes);
+app.use('/', userRoutes);
+app.use('/', ambRoutes);
+
 
 app.get('/', (req, res) => {
     if(req.session.loggedin != true){
