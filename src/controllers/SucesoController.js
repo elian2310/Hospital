@@ -66,7 +66,7 @@ function edit(req, res){
             if(err) {
                 res.json(err);
             }
-            res.render('sucesos/edit', { sucesos });
+            res.render('sucesos/edit', { sucesos: sucesos, layout: 'employee.hbs' });
         });
     });
     

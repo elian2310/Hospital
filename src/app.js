@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const session = require('express-session')
 const sucesosRoutes = require('./routes/sucesos');
+const loginRoutes = require('./routes/login');
+const personalRoutes = require('./routes/personal');
 
 const app = express();
 app.set('port', 4000);
@@ -29,14 +31,24 @@ app.use(myconnection(mysql, {
     database: 'dbhosp'
 }, 'single'));
 
-
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.listen(app.get('port'), () => {
     console.log('Oyendo en puerto ', app.get('port'));
 });
 
 app.use('/', sucesosRoutes);
+app.use('/', loginRoutes);
+app.use('/', personalRoutes);
 
 app.get('/', (req, res) => {
-    res.render('home', {layout: 'main.hbs'});
+    if(req.session.loggedin != true){
+        res.render('home', { layout: 'main.hbs'});
+    } else {
+        res.redirect('/sucesos', { layout: 'employee.hbs'});
+    }
 });

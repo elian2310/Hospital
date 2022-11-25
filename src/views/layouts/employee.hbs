@@ -28,6 +28,15 @@
             });
         });
     </script>
+    <script>
+        jQuery(function($){
+            $('#nacimiento').datetimepicker({
+                dateFormat: "yy-mm-dd",
+                showSecond: true,
+                timeFormat: "hh:mm:ss"
+            });
+        });
+    </script>
  
   </head>
   <body class="bg-green-100">
@@ -45,10 +54,10 @@
                 <a href="/registrar" class="nav-link font-semibold border-2 border-white hover:text-green-700 hover:bg-white-700 py-3 px-3 rounded.md">+Suceso</a>
             </li>
             <li class="nav-item px-4">
-                <a href="/sucesos" class="nav-link font-semibold hover:bg-green-700 py-3 px-3 rounded.md">Personal</a>
+                <a href="/personal" class="nav-link font-semibold hover:bg-green-700 py-3 px-3 rounded.md">Personal</a>
             </li>
             <li class="nav-item px-4">
-                <a href="/registrar" class="nav-link font-semibold border-2 border-white hover:text-green-700 hover:bg-white-700 py-3 px-3 rounded.md">+Personal</a>
+                <a href="/registrarPersonal" class="nav-link font-semibold border-2 border-white hover:text-green-700 hover:bg-white-700 py-3 px-3 rounded.md">+Personal</a>
             </li>
             <li class="nav-item px-4">
                 <a href="/sucesos" class="nav-link font-semibold hover:bg-green-700 py-3 px-3 rounded.md">Usuarios</a>
@@ -65,7 +74,7 @@
             </li>
 
             <li class="nav-item px-4">
-                <a href="/sucesos" class="bg-red-500 nav-link font-semibold hover:bg-red-700 py-3 px-3 rounded.md">Logout</a>
+                <a href="/logout" class="bg-red-500 nav-link font-semibold hover:bg-red-700 py-3 px-3 rounded.md">Logout</a>
             </li>
         </ul>
     </nav>
