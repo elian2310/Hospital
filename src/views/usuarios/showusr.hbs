@@ -10,7 +10,6 @@
           <th class="w-30 py-4 ...">Apellido S</th>
           <th class="w-30 py-4 ...">Telefono</th>
           <th class="w-30 py-4 ...">Nacimiento</th>
-          <th class="w-1/4 py-4 ...">Password</th>
           <th class="w-30 py-4 ...">Accion</th>
         </tr>
       </thead>
@@ -23,10 +22,9 @@
           <td class="p-3">{{apellidoSecundario}}</td>
           <td class="p-3">{{telefono}}</td>
           <td class="p-3">{{nacimiento}}</td>
-          <td class="p-3 text-center">{{password}}</td>
           <td class="p-3 flex">
             <form action="/usuarios/delete" method="POST" class="mx-2">
-              <input type="hidden" value="{{ciUsuario}}" name="id">
+              <input type="hidden" value="{{ciUsuario}}" name="ciUsuario">
               <button class="bg-red-500 text-white px-3 py-1 rounded-sm" type="submit">
                 <i class="fas fa-trash"></i></button>
             </form>

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 function login(req, res) {
-    if(req.session.loggedin != true){
+    if(!req.session.loggedin){
         res.render('login/index', { layout: 'main.hbs'});
     } else {
         res.redirect('/sucesos');
@@ -38,7 +38,7 @@ function auth(req, res) {
 }
 
 function logout(req, res){
-    if (req.session.loggedin == true) {
+    if (req.session.loggedin) {
         req.session.destroy();
 
     }

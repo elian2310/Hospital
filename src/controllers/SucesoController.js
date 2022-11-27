@@ -1,40 +1,44 @@
 function index(req, res){
-    req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM suceso', (err, sucesos) => {
-            if(err) {
-                res.json(err);
-            }
-            res.render('sucesos/index', { layout: 'employee.hbs', sucesos: sucesos });
+    if(req.session.loggedin){
+        req.getConnection((err, conn) => {
+            conn.query('SELECT * FROM suceso', (err, sucesos) => {
+                if(err) {
+                    res.json(err);
+                }
+                res.render('sucesos/index', { layout: 'employee.hbs', sucesos: sucesos });
+            });
         });
-    });
-    
+    }else{
+        res.redirect('/login');
+    }
 }
 
 function registrar(req, res){
-    req.getConnection((err, conn) => {
-        var d_personal = null;
-        var d_ambientes = null;
-        var d_usuarios = null;
-        conn.query('SELECT ciPersonal, nombre, apellidoPrincipal  FROM personal', (err1, personal) => {
-            if(err1) {
-                res.json(err1);
-            }
-            d_personal = personal;
+    if(req.session.loggedin){
+        req.getConnection((err, conn) => {
+            
+            conn.query('SELECT ciPersonal, nombre, apellidoPrincipal  FROM personal', (err1, personal) => {
+                if(err1) {
+                    res.json(err1);
+                }
+                conn.query('SELECT idAmbiente, nombre FROM ambiente', (err2, ambientes) => {
+                    if(err2) {
+                        res.json(err2);
+                    }
+                    conn.query('SELECT ciUsuario, nombre, apellidoPrincipal FROM usuario', (err3, usuarios) => {
+                        if(err3) {
+                            res.json(err3);
+                        }
+                        res.render('sucesos/registrar', { layout: 'employee.hbs', data_personal : personal, data_ambientes : ambientes, data_usuarios : usuarios });
+                    });
+                });
+            });
         });
-        conn.query('SELECT idAmbiente, nombre FROM ambiente', (err2, ambientes) => {
-            if(err2) {
-                res.json(err2);
-            }
-            d_ambientes = ambientes;
-        });
-        conn.query('SELECT ciUsuario, nombre, apellidoPrincipal FROM usuario', (err3, usuarios) => {
-            if(err3) {
-                res.json(err3);
-            }
-            d_usuarios = usuarios;
-        });
-        res.render('sucesos/registrar', { layout: 'employee.hbs', data_personal : d_personal, data_ambientes : d_ambientes, data_usuarios : d_usuarios });
-    });
+
+    }else{
+        res.redirect('/login');
+    }
+    
     
 }
 
@@ -64,23 +68,44 @@ function destroy(req, res){
 
 function edit(req, res){
     const idSuceso = req.params.idSuceso;
-    req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM suceso WHERE idSuceso = ?',[idSuceso], (err, sucesos) => {
-            if(err) {
-                res.json(err);
-            }
-            res.render('sucesos/edit', { sucesos: sucesos, layout: 'employee.hbs' });
+    if(req.session.loggedin == true){
+        req.getConnection((err, conn) => {
+            conn.query('SELECT * FROM suceso WHERE idSuceso = ?',[idSuceso], (err, sucesos) => {
+                if(err) {
+                    res.json(err);
+                }
+                conn.query('SELECT ciPersonal, nombre, apellidoPrincipal  FROM personal', (err1, personal) => {
+                    if(err1) {
+                        res.json(err1);
+                    }
+                    conn.query('SELECT idAmbiente, nombre FROM ambiente', (err2, ambientes) => {
+                        if(err2) {
+                            res.json(err2);
+                        }
+                        conn.query('SELECT ciUsuario, nombre, apellidoPrincipal FROM usuario', (err3, usuarios) => {
+                            if(err3) {
+                                res.json(err3);
+                            }
+                            res.render('sucesos/edit', { layout: 'employee.hbs', data_personal : personal, data_ambientes : ambientes, data_usuarios : usuarios, sucesos: sucesos });
+                        });
+                    });
+                });
+            });
         });
-    });
+
+    }else{
+        res.redirect('/login');
+    }
+    
     
 }
 
 function update(req, res) {
-    const id = req.params.id;
+    const id = req.params.idSuceso;
     const data = req.body;
 
     req.getConnection((err, conn) => {
-        conn.query('UPDATE suceso SET ? WHERE idSuceso = ?', [data, id], (err, rows) => {
+        conn.query('UPDATE suceso SET ? WHERE idSuceso = ?', [data, idSucesos], (err, rows) => {
             res.redirect('/sucesos');
         });
     });

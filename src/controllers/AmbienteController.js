@@ -1,21 +1,41 @@
 function index(req, res){
+    if(req.session.loggedin){
+        req.getConnection((err, conn) => {
+            conn.query("SELECT idAmbiente, nombre, CASE WHEN disponible = 1 THEN 'Disponible' ELSE 'No Disponible' END AS disponible FROM ambiente", (err, ambientes) => {
+                if(err) {
+                    res.json(err);
+                }
+                res.render('ambientes/showamb', { layout: 'employee.hbs', ambientes: ambientes });
+            });
+        });
+
+    }else{
+        res.redirect('/login');
+    }
+    
+    
+}
+function indexUsr(req, res){
+    
     req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM ambiente', (err, ambientes) => {
+        conn.query("SELECT idAmbiente, nombre, CASE WHEN disponible = 1 THEN 'Disponible' ELSE 'No Disponible' END AS disponible FROM ambiente", (err, ambientes) => {
             if(err) {
                 res.json(err);
             }
-            res.render('ambientes/showamb', { layout: 'employee.hbs', ambientes: ambientes });
+            res.render('ambientes/showambusr', { layout: 'main.hbs', ambientes: ambientes });
         });
     });
+    
+    
     
 }
 
 function destroy(req, res){
-    const idSuceso = req.body.idSuceso;
+    const idAmbiente = req.body.idAmbiente;
 
     req.getConnection((err, conn) => {
-        conn.query('DELETE FROM usuario WHERE idAmbiente = ?', [idAmbiente], (err, rows) => {
-            res.redirect('/ambientes');
+        conn.query('DELETE FROM ambiente WHERE idAmbiente = ?', [idAmbiente], (err, rows) => {
+            res.redirect('/ambientes/index');
         });
     })
 }
@@ -23,25 +43,34 @@ function destroy(req, res){
 
 
 function edit(req, res){
-    const idSuceso = req.params.idSuceso;
-    req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM suceso WHERE idAmbiente = ?',[idAmbiente], (err, sucesos) => {
-            if(err) {
-                res.json(err);
-            }
-            res.render('/ambientes', { ambientes });
+    const idAmbiente = req.params.idAmbiente;
+    if(req.session.loggedin){
+        req.getConnection((err, conn) => {
+            conn.query('SELECT * FROM ambiente WHERE idAmbiente = ?',[idAmbiente], (err, ambientes) => {
+                if(err) {
+                    res.json(err);
+                }
+                res.render('ambientes/editamb', { layout: 'employee.hbs',ambientes: ambientes });
+            });
         });
-    });
+    }else{
+        res.redirect('/login');
+    }
+    
     
 }
 
 function registrar(req, res){
-    req.getConnection((err, conn) => {
-        
-        
-        res.render('ambientes/regisamb', { layout: 'employee.hbs'});
-    });
     
+    if (req.session.loggedin){
+        req.getConnection((err, conn) => {
+        
+        
+            res.render('ambientes/regisamb', { layout: 'employee.hbs'});
+        });
+    }else{
+        res.redirect('/login')
+    }   
 }
 
 function store(req, res){
@@ -49,19 +78,19 @@ function store(req, res){
     const datos = req.body;
 
     req.getConnection((err, conn) => {
-        conn.query('INSERT INTO suceso SET ?', [datos], (err, rows) => {
-            res.redirect('/ambientes')
+        conn.query('INSERT INTO ambiente SET ?', [datos], (err, rows) => {
+            res.redirect('/ambientes/index')
         });    
     });
 }
 
 function update(req, res) {
-    const id = req.params.id;
+    const idAmbiente = req.params.idAmbiente;
     const data = req.body;
 
     req.getConnection((err, conn) => {
-        conn.query('UPDATE suceso SET ? WHERE idAmbiente = ?', [data, id], (err, rows) => {
-            res.redirect('/ambientes');
+        conn.query('UPDATE ambiente SET ? WHERE idAmbiente = ?', [data, idAmbiente], (err, rows) => {
+            res.redirect('/ambientes/index');
         });
     });
 }
@@ -73,4 +102,5 @@ module.exports = {
     registrar: registrar,
     store: store,
     update: update,
+    indexUsr: indexUsr,
 }

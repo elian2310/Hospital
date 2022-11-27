@@ -10,7 +10,7 @@
           <th class="w-30 py-4 ...">Apellido S</th>
           <th class="w-30 py-4 ...">Telefono</th>
           <th class="w-30 py-4 ...">Nacimiento</th>
-          <th class="w-30 py-4 ...">Contraseña</th>
+          
           <th class="w-30 py-4 ...">Autoridad</th>
           <th class="w-30 py-4 ...">Cargo</th>
           <th class="w-30 py-4 ...">Accion</th>
@@ -25,16 +25,16 @@
           <td class="p-3">{{apellidoSecundario}}</td>
           <td class="p-3">{{telefono}}</td>
           <td class="p-3">{{nacimiento}}</td>
-          <td class="p-3">{{password}}</td>
+          
           <td class="p-3">{{autoridad}}</td>
           <td class="p-3">{{cargo}}</td>
           <td class="p-3 flex">
             <form action="/personal/delete" method="POST" class="mx-2">
-              <input type="hidden" value="{{idSuceso}}" name="id">
+              <input type="hidden" value="{{ciPersonal}}" name="ciPersonal">
               <button class="bg-red-500 text-white px-3 py-1 rounded-sm" type="submit">
                 <i class="fas fa-trash"></i></button>
             </form>
-            <a href="/personal/edit/{{idSuceso}}" class="bg-green-500 text-white px-3 py-1 rounded-sm">
+            <a href="/personal/edit/{{ciPersonal}}" class="bg-green-500 text-white px-3 py-1 rounded-sm">
               <i class="fas fa-pen"></i></a>
           </td>
         </tr>

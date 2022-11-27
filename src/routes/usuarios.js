@@ -4,9 +4,9 @@ const router = express.Router();
 
 router.get('/usuarios/index', UserController.index);
 router.get('/usuarios/regisuser', UserController.registrar);
-router.post('/regisuser', UserController.store);
+router.post('/usuarios/regisuser', UserController.store);
 router.post('/usuarios/delete', UserController.destroy );
 router.get('/usuarios/edit/:ciUsuario', UserController.edit);
-router.post('/usuarios/edir/:ciUsuario', UserController.update);
+router.post('/usuarios/edit/:ciUsuario', UserController.update);
 
 module.exports = router;

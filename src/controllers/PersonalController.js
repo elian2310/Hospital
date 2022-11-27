@@ -1,22 +1,34 @@
 const bcrypt = require('bcrypt');
 
 function index(req, res){
-    req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM personal', (err, personal) => {
-            if(err) {
-                res.json(err);
-            }
-            res.render('personal/index', { layout: 'employee.hbs', sucesos: personal });
+    if(req.session.loggedin){
+        req.getConnection((err, conn) => {
+            conn.query('SELECT * FROM personal', (err, personal) => {
+                if(err) {
+                    res.json(err);
+                }
+                res.render('personal/index', { layout: 'employee.hbs', personal: personal });
+            });
         });
-    });
+
+    }else{
+        res.redirect('/login');
+    }
+    
     
 }
 
 function registrar(req, res){
-    req.getConnection((err, conn) => {
+    if(req.session.loggedin){
+        req.getConnection((err, conn) => {
        
-        res.render('personal/registrar', { layout: 'employee.hbs' });
-    });
+            res.render('personal/registrar', { layout: 'employee.hbs' });
+        });
+
+    }else{
+        res.redirect('/login');
+    }
+    
     
 }
 
@@ -36,36 +48,42 @@ function store(req, res){
 }
 
 function destroy(req, res){
-    const idSuceso = req.body.idSuceso;
+    const ciPersonal = req.body.ciPersonal;
 
     req.getConnection((err, conn) => {
-        conn.query('DELETE FROM suceso WHERE idSuceso = ?', [idSuceso], (err, rows) => {
+        conn.query('DELETE FROM personal WHERE ciPersonal = ?', [ciPersonal], (err, rows) => {
             res.redirect('/personal');
         });
     })
 }
 
 function edit(req, res){
-    const idSuceso = req.params.idSuceso;
-    
-    req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM suceso WHERE ciPersonal = ?',[idSuceso], (err, personal) => {
-            if(err) {
-                res.json(err);
-            }
-            res.render('personal/edit', { personal: personal, layout: 'employee.hbs' });
+    const ciPersonal = req.params.ciPersonal;
+    if(req.session.loggedin){
+        req.getConnection((err, conn) => {
+            conn.query('SELECT * FROM suceso WHERE ciPersonal = ?',[ciPersonal], (err, personal) => {
+                if(err) {
+                    res.json(err);
+                }
+                res.render('personal/edit', { personal: personal, layout: 'employee.hbs' });
+            });
         });
-    });
+
+    }else{
+        res.redirect('/login');
+    }
+    
+    
     
 }
 
 function update(req, res) {
-    const id = req.params.id;
+    const ciPersonal = req.params.ciPersonal;
     const data = req.body;
     bcrypt.hash(datos.password, 12).then(hash => {
         data.password = hash;
         req.getConnection((err, conn) => {
-            conn.query('UPDATE personal SET ? WHERE ciPersonal = ?', [data, id], (err, rows) => {
+            conn.query('UPDATE personal SET ? WHERE ciPersonal = ?', [data, ciPersonal], (err, rows) => {
                 res.redirect('/personal');
             });
         });
