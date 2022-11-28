@@ -46,7 +46,6 @@ function registrar(req, res){
 
 
 function store(req, res){
-    console.log(req.body);
     const datos = req.body;
 
     req.getConnection((err, conn) => {
@@ -101,11 +100,11 @@ function edit(req, res){
 }
 
 function update(req, res) {
-    const id = req.params.idSuceso;
+    const idSuceso = req.params.idSuceso;
     const data = req.body;
 
     req.getConnection((err, conn) => {
-        conn.query('UPDATE suceso SET ? WHERE idSuceso = ?', [data, idSucesos], (err, rows) => {
+        conn.query('UPDATE suceso SET ? WHERE idSuceso = ?', [data, idSuceso], (err, rows) => {
             res.redirect('/sucesos');
         });
     });

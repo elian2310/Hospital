@@ -61,7 +61,7 @@ function edit(req, res){
     const ciPersonal = req.params.ciPersonal;
     if(req.session.loggedin){
         req.getConnection((err, conn) => {
-            conn.query('SELECT * FROM suceso WHERE ciPersonal = ?',[ciPersonal], (err, personal) => {
+            conn.query('SELECT * FROM personal WHERE ciPersonal = ?',[ciPersonal], (err, personal) => {
                 if(err) {
                     res.json(err);
                 }
@@ -80,7 +80,7 @@ function edit(req, res){
 function update(req, res) {
     const ciPersonal = req.params.ciPersonal;
     const data = req.body;
-    bcrypt.hash(datos.password, 12).then(hash => {
+    bcrypt.hash(data.password, 12).then(hash => {
         data.password = hash;
         req.getConnection((err, conn) => {
             conn.query('UPDATE personal SET ? WHERE ciPersonal = ?', [data, ciPersonal], (err, rows) => {

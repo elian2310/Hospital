@@ -4,30 +4,30 @@
     <form action="" method="POST" class="mt-4">
         <input type="text" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white" placeholder="Tipo de suceso" name="tipo" value="{{tipo}}">
 
-        <select name="ambiente" id="ambiente" class="form-control rounded-md bg-gray-200 w-full my-2">
+        <select name="idAmbiente" id="idAmbiente" class="form-control rounded-md bg-gray-200 w-full my-2">
             <option value="">Seleccione un ambiente</option>
-            {{#each data_ambientes}}
+            {{#each ../data_ambientes}}
             <option value="{{idAmbiente}}">{{nombre}}</option>
             {{/each}}
         </select>
 
-        <select name="personal" id="personal" class="form-control rounded-md bg-gray-200 w-full my-2">
+        <select name="ciPersonal" id="ciPersonal" class="form-control rounded-md bg-gray-200 w-full my-2">
             <option value="">Seleccione un encargado</option>
-            {{#each data_personal}}
+            {{#each ../data_personal}}
             <option value="{{ciPersonal}}">{{nombre}} {{apellidoPrincipal}}</option>
             {{/each}}
         </select>
 
-        <select name="usuario" id="usuario" class="form-control rounded-md bg-gray-200 w-full my-2">
+        <select name="ciUsuario" id="ciUsuario" class="form-control rounded-md bg-gray-200 w-full my-2">
             <option value="">Seleccione un paciente</option>
-            {{#each data_usuarios}}
+            {{#each ../data_usuarios}}
             <option value="{{ciUsuario}}">{{nombre}} {{apellidoPrincipal}}</option>
             {{/each}}
         </select>
 
         <input type="text" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white" placeholder="Fecha" name="fecha" id="fecha" value="{{fecha}}">
 
-        <textarea class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white h-40" placeholder="Descripción del suceso" name="descripcion" value="{{descripcion}}"></textarea>
+        <textarea class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white h-40" placeholder="Descripción del suceso" name="resultado" value="{{resultado}}"></textarea>
 
         <button type="submit" class="rounded-md bg-green-500 w-full text-lg text-white font-semibold p-2 my-3 hover:bg-green-600 focus:bg-green-700">Editar</button>
     </form>

@@ -36,7 +36,7 @@ function edit(req, res){
                 if(err) {
                     res.json(err);
                 }
-                res.render('usuarios/editauser', { Usuarios: usuarios, layout: 'employee.hbs' });
+                res.render('usuarios/editauser', { usuarios: usuarios, layout: 'employee.hbs' });
             });
         });
     }else{
@@ -77,10 +77,12 @@ function store(req, res){
 function update(req, res) {
     const ciUsuario = req.params.ciUsuario;
     const data = req.body;
-
-    req.getConnection((err, conn) => {
-        conn.query('UPDATE suceso SET ? WHERE ciUsuario = ?', [data, ciUsuario], (err, rows) => {
-            res.redirect('/usuarios/index');
+    bcrypt.hash(data.password, 12).then(hash => {
+        data.password = hash;
+        req.getConnection((err, conn) => {
+            conn.query('UPDATE usuario SET ? WHERE ciUsuario = ?', [data, ciUsuario], (err, rows) => {
+                res.redirect('/usuarios/index');
+            });
         });
     });
 }
