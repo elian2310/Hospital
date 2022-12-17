@@ -18,6 +18,8 @@
     "express-myconnection": "^1.0.4",
     "express-session": "^1.17.3",
     "flatpickr": "^4.6.13",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "pdfkit": "^0.13.0",
+    "pdfkit-construct": "^1.2.3"
   }
 }

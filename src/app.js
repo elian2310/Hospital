@@ -8,7 +8,7 @@ const sucesosRoutes = require('./routes/sucesos');
 const loginRoutes = require('./routes/login');
 const personalRoutes = require('./routes/personal');
 const userRoutes = require('./routes/usuarios');
-const ambRoutes = require('./routes/ambientes')
+const ambRoutes = require('./routes/ambientes');
 
 const app = express();
 app.set('port', 4000);

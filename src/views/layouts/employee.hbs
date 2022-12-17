@@ -18,6 +18,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
+    
+    
+  
 
     <script>
         jQuery(function($){
@@ -31,6 +34,24 @@
     <script>
         jQuery(function($){
             $('#nacimiento').datetimepicker({
+                dateFormat: "yy-mm-dd",
+                showSecond: true,
+                timeFormat: "hh:mm:ss"
+            });
+        });
+    </script>
+    <script>
+        jQuery(function($){
+            $('#desde').datetimepicker({
+                dateFormat: "yy-mm-dd",
+                showSecond: true,
+                timeFormat: "hh:mm:ss"
+            });
+        });
+    </script>
+    <script>
+        jQuery(function($){
+            $('#hasta').datetimepicker({
                 dateFormat: "yy-mm-dd",
                 showSecond: true,
                 timeFormat: "hh:mm:ss"
